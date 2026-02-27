@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Email Preview</title>
+</head>
+
+<body style="background:#eef2f7; font-family: Arial, Helvetica, sans-serif; padding:20px;">
+
+<!-- Input Controls -->
+<div style="max-width:700px; margin:auto; background:#ffffff; padding:16px; border-radius:8px; border:1px solid #ddd; margin-bottom:16px;">
+  <h3 style="margin-top:0;">Preview Controls</h3>
+
+  <label>Client Name</label><br>
+  <input type="text" id="client" placeholder="Mr. Vimal" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+  <label>Property Name</label><br>
+  <input type="text" id="property_name" placeholder="Holiday Inn Express & Suites LaPlace" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+  <label>Property Code</label><br>
+  <input type="text" id="property_code" placeholder="LAPLA" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+  <button onclick="updateEmail()" style="background:#062956; color:white; padding:10px 16px; border:none; border-radius:6px; cursor:pointer;">
+    Update Preview
+  </button>
+</div>
+
+<!-- Email Preview -->
+<div id="emailPreview" style="max-width:700px; margin:auto; background:#ffffff; border-radius:10px; overflow:hidden; border:1px solid #e3e6ea;">
+
+  <div style="background:#062956; color:#ffffff; padding:20px 24px;">
+    <h2 style="margin:0;">Expanding Your RevEVOLVE Portfolio</h2>
+    <p style="margin:6px 0 0 0; opacity:0.92; font-style: italic; font-size:14px; font-weight:700;">
+      Consistent data. Confident decisions.
+    </p>
+  </div>
+
+  <div style="padding:24px; color:#1a1a1a; line-height:1.6;">
+
+    <p style="font-size:16px;">Greetings <span id="client_text">[CLIENT]</span>,</p>
+
+    <p>
+      We are pleased to share that <strong><span id="property_name_text">[PROPERTY_NAME]</span>
+      (<span id="property_code_text">[PROPERTY_CODE]</span>)</strong> has been successfully added to
+      <strong>RevEVOLVE</strong>. We appreciate the continued trust you place in us. We are excited to support your team across each property with consistent, decision-ready insights.
+    </p>
+
+    <p>
+      If you wish to review configurations or tailor any settings for this property, please feel free to reach out and our team will assist promptly.
+    </p>
+
+  </div>
+</div>
+
+<script>
+function updateEmail() {
+  document.getElementById("client_text").innerText = document.getElementById("client").value || "[CLIENT]";
+  document.getElementById("property_name_text").innerText = document.getElementById("property_name").value || "[PROPERTY_NAME]";
+  document.getElementById("property_code_text").innerText = document.getElementById("property_code").value || "[PROPERTY_CODE]";
+}
+</script>
+
+</body>
+</html>

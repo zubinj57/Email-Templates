@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RevEVOLVE First Property Email Preview</title>
+</head>
+
+<body style="background:#eef2f7; font-family: Arial, Helvetica, sans-serif; padding:20px;">
+
+  <!-- Preview Controls -->
+  <div style="max-width:700px; margin:auto; background:#ffffff; padding:16px; border-radius:8px; border:1px solid #ddd; margin-bottom:16px;">
+    <h3 style="margin:0 0 12px 0;">Preview Controls</h3>
+
+    <label>Client Name</label><br>
+    <input type="text" id="clientInput" placeholder="Enter client name" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <label>Property Name</label><br>
+    <input type="text" id="propertyInput" placeholder="Enter property name" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <label>Property Code</label><br>
+    <input type="text" id="propertyCodeInput" placeholder="Enter property code" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <label>Username</label><br>
+    <input type="text" id="usernameInput" placeholder="Enter username" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <label>Password</label><br>
+    <input type="text" id="passwordInput" placeholder="Enter password" style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <button onclick="updateEmail()" style="background:#062956; color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer;">
+      Update Preview
+    </button>
+
+    <button onclick="resetEmail()" style="background:#6b7280; color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; margin-left:8px;">
+      Clear
+    </button>
+  </div>
+
+  <!-- EMAIL CONTENT -->
+  <div style="font-family: Arial, Helvetica, sans-serif; background:#f4f7fb; padding:24px;">
+    
+    <div style="max-width:700px; margin:auto; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #e3e6ea;">
+
+      <div style="background:#062956; color:#ffffff; padding:20px 24px;">
+          <h2 style="margin:0;">Welcome to RevEVOLVE</h2>
+          <p style="margin:6px 0 0 0; opacity:0.85; font-style: italic; font-size:14px;">
+              Unlocking smarter revenue decisions
+          </p>
+      </div>
+
+      <div style="padding:24px; color:#1a1a1a; line-height:1.6;">
+
+        <p style="font-size:16px;">Greetings <span id="client_text">[CLIENT]</span>,</p>
+
+        <p>
+          We are truly delighted to welcome you to <strong>RevEVOLVE</strong> and to share that 
+          <strong>
+            <span id="property_name_text">[PROPERTY_NAME]</span>
+            (<span id="property_code_text">[PROPERTY_CODE]</span>)
+          </strong> has been successfully onboarded.
+          It means a great deal to us that this is your first property on the platform, and we want you to know that our team is fully committed to making this a smooth, thoughtful, and well-supported experience from day one.
+        </p>
+
+        <p>
+          At <strong>Hotel Switchboard</strong>, we genuinely value every hotel we work with. Our goal is not just to provide a platform. We aim to be a reliable partner who listens carefully, responds quickly, and helps turn data into clear and confident decisions.
+        </p>
+
+        <div style="background:#f7f9fc; border-left:4px solid #1a73e8; padding:18px; margin-top:24px; border-radius:6px;">
+          <h3 style="margin-top:0;">Getting Started</h3>
+
+          <p>
+            Please visit the 
+            <a href="https://hotelswitchboard.com" style="color:#1a73e8; font-weight:bold; text-decoration:none;">
+              HotelSwitchboard
+            </a> 
+            website and log in using the credentials below.
+          </p>
+
+          <div style="background:#ffffff; padding:14px; border-radius:6px; border:1px solid #e3e6ea; margin-top:10px;">
+            <p style="margin:4px 0;"><strong>Username:</strong> <span id="usernameText">[USERNAME]</span></p>
+            <p style="margin:4px 0;"><strong>Password:</strong> <span id="passwordText">[PASSWORD]</span></p>
+          </div>
+
+          <p style="font-size:13px; color:#555; margin-top:8px;">
+            For security purposes, we recommend resetting your password as soon as you log in.
+          </p>
+        </div>
+
+        <div style="background:#f7f9fc; border-left:4px solid #34a853; padding:18px; margin-top:24px; border-radius:6px;">
+          <h3 style="margin-top:0;">Next Steps</h3>
+
+          <ol style="padding-left:18px;">
+            <li>Navigate to <strong>RevEVOLVE</strong>.</li>
+            <li>Select your property from the dropdown at the top of the page.</li>
+            <li>
+              Review and update essential property configurations such as 
+              <strong>Rate Plan Mapping,  Budget,</strong> and 
+              <strong>User Forecast</strong> by clicking the <strong>Property Config Edit</strong> icon.
+            </li>
+            <li>Explore your property's performance and insights through the RevEVOLVE widgets.</li>
+          </ol>
+        </div>
+
+        <div style="background:#f7f9fc; border-left:4px solid #fbbc05; padding:18px; margin-top:24px; border-radius:6px;">
+          <h3 style="margin-top:0;">Personal Walkthrough</h3>
+
+          <p>
+            Please do not hesitate to reach out at any time whether you have a quick question or would like a deeper discussion. 
+            We would be delighted to arrange a detailed walkthrough next week or at any other time that suits your schedule.
+          </p>
+
+          <p>
+            During this session, we will personally guide you through the platform. We will demonstrate key workflows such as 
+            <strong>report scheduling via email</strong>, <strong>CoStar report uploads</strong>, and also <strong>review the core widgets</strong> designed to support your day to day decision making.
+          </p>
+        </div>
+
+        <p style="margin-top:24px;">
+          We are looking forward to working closely with you and ensuring a smooth experience as you begin using RevEVOLVE. 
+          Thank you for trusting <strong>Hotel Switchboard</strong>.
+        </p>
+
+        <p style="margin-top:24px;">
+          Warm regards,<br>
+          <strong>Team RevEVOLVE</strong><br>
+          Hotel Switchboard
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+function updateEmail() {
+  document.getElementById("client_text").innerText =
+    document.getElementById("clientInput").value || "[CLIENT]";
+
+  document.getElementById("property_name_text").innerText =
+    document.getElementById("propertyInput").value || "[PROPERTY_NAME]";
+
+  document.getElementById("property_code_text").innerText =
+    document.getElementById("propertyCodeInput").value || "[PROPERTY_CODE]";
+
+  document.getElementById("usernameText").innerText =
+    document.getElementById("usernameInput").value || "[USERNAME]";
+
+  document.getElementById("passwordText").innerText =
+    document.getElementById("passwordInput").value || "[PASSWORD]";
+}
+
+function resetEmail() {
+  document.getElementById("clientInput").value = "";
+  document.getElementById("propertyInput").value = "";
+  document.getElementById("propertyCodeInput").value = "";
+  document.getElementById("usernameInput").value = "";
+  document.getElementById("passwordInput").value = "";
+  updateEmail();
+}
+
+updateEmail();
+</script>
+
+</body>
+</html>

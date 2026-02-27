@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IHG Opera (Desktop v5) Report Setup</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; color:#111; line-height:1.45; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 8px 4px; }
+    h2 { margin: 0 0 10px 0; }
+    h3 { margin: 18px 0 8px 0; }
+    h4 { margin: 14px 0 6px 0; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 22px; }
+    li { margin: 4px 0; }
+    .note { background:#f6f7f9; border:1px solid #e5e7eb; padding:10px 12px; border-radius:8px; margin: 10px 0; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:#f3f4f6; padding: 1px 6px; border-radius:6px; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 12px 0; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; vertical-align: top; }
+    th { background: #fafafa; text-align: left; }
+    .small { color:#444; font-size: 0.95em; }
+    .section { border-left: 4px solid #e5e7eb; padding-left: 12px; margin: 14px 0; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <!-- <h2>RevEVOLVE Onboarding</h2> -->
+    
+    <!-- Greeting Section -->
+    <div style="border:1px solid #d1d5db; border-radius:10px; padding:16px 18px; margin-bottom:18px; background:#ffffff;">
+        
+        <p style="margin-top:0;"><strong>Hi Christine,</strong></p>
+
+        <p>
+            We’re excited to have you on board with <strong>RevEVOLVE</strong>. As we move ahead with onboarding,
+            we had a few quick questions:
+        </p>
+
+        <ul>
+            <li>
+            While logging into <strong>SynxisCloud</strong> using the provided credentials, we noticed it requires a
+            <strong>2FA code via SMS</strong>. Would it be possible to have the code sent to
+            <a href="mailto:itsupport@hotelswitchboard.com">itsupport@hotelswitchboard.com</a>,
+            since that’s how our system is set up to operate?
+            </li>
+
+            <li>
+            Could you confirm whether <strong>Staybridge Suites Oklahoma City Downtown – Bricktown</strong>
+            uses <strong>Opera</strong> or <strong>HotelKey</strong> as its PMS? This wasn’t specified in the onboarding sheet.
+            </li>
+        </ul>
+
+        <p style="margin-bottom:0;">
+            To onboard <strong>Candlewood Suites Midwest City OK</strong>, we’ll need to schedule a few reports —
+            details are listed below. For this we would recommend us getting on a call in order to expedite the process. Do let us know your availability during this week.
+        </p>
+
+    </div>
+
+    <h2>IHG Opera (Desktop v5) — Report Setup</h2>
+    <p>For <strong>IHG Opera (Desktop v5)</strong>, we would need <strong>2 sets of reports</strong>:</p>
+    <ol>
+      <li><strong>One Time Onboarding Reports</strong></li>
+      <li><strong>Daily Scheduled Reports</strong></li>
+    </ol>
+
+    <div class="note">
+      <strong>Important:</strong> For <em>all</em> reports below, ensure the export format / file type is set to
+      <span class="kbd">.XML</span>.
+    </div>
+
+    <div class="section">
+      <h3>A. One Time Onboarding Reports (Miscellaneous → Reports)</h3>
+
+      <h4>a. Reservation Entered On and By</h4>
+      <ul>
+        <li>Ensure <strong>both</strong> checkboxes are selected: <strong>StayDate</strong> and <strong>BookingDate</strong></li>
+        <li><strong>StayDate:</strong> 01-Jan-2022 to 31-Dec-2026</li>
+        <li><strong>BookingDate:</strong> 01-Jan-2022 to <strong>CurrentDate</strong> (at the time of sending this email: 16-Feb-2026)</li>
+        <li><strong>Sort by:</strong> Arrival Date</li>
+      </ul>
+
+      <h4>b. Reservation Cancellations</h4>
+      <ul>
+        <li><strong>Cancel Date:</strong> 01-Jan-2022 to <strong>CurrentDate</strong> (at the time of sending this email: 16-Feb-2026)</li>
+        <li><strong>Sort by:</strong> Cancel Date</li>
+      </ul>
+
+      <h4>c. History and Forecast Current Year</h4>
+      <ul>
+        <li><strong>Dates:</strong> 01-Jan-2022 to 31-Dec-2026</li>
+      </ul>
+
+      <div class="note">
+        <strong>Action:</strong> Preview these reports and email the exported <strong>3 XML files</strong> to
+        <a href="mailto:itsupport@hotelswitchboard.com">itsupport@hotelswitchboard.com</a>.
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>B. Daily Scheduled Reports (Miscellaneous → Report Scheduler)</h3>
+
+      <h4>a. Reservation Entered On and By</h4>
+      <ol>
+        <li>Search for the report name and ensure the report type is <strong>.XML</strong>.</li>
+        <li>Create a new schedule.</li>
+        <li><strong>Start Date Time:</strong> Tomorrow (17-Feb-2026 05:00)</li>
+        <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
+        <li>Ensure <strong>both</strong> checkboxes are selected: <strong>StayDate</strong> and <strong>BookingDate</strong>.</li>
+        <li><strong>StayDate:</strong> 18-Nov-2025 to 17-May-2026</li>
+        <li><strong>BookingDate:</strong> 18-Nov-2025 to <strong>Current Date</strong> (at the time of sending this email: 16-Feb-2026)</li>
+        <li><strong>Sort by:</strong> Arrival Date</li>
+        <li>
+          After saving this schedule, change the report parameters:
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FROM DATE</td>
+                <td>REPORT DATE – 90 DAYS</td>
+              </tr>
+              <tr>
+                <td>STAY FROM DATE</td>
+                <td>REPORT DATE – 90 DAYS</td>
+              </tr>
+              <tr>
+                <td>STAY TO DATE</td>
+                <td>REPORT DATE + 90 DAYS</td>
+              </tr>
+              <tr>
+                <td>TO DATE</td>
+                <td>REPORT DATE + 0 DAYS</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Distribution List:</strong>
+        <ul>
+          <li>Select <strong>Email</strong> and set it to <a href="mailto:itsupport@hotelswitchboard.com">itsupport@hotelswitchboard.com</a></li>
+          <li>Set the Email Subject to: <span class="kbd">{YOUR PROPERTY CODE}_Reservations</span></li>
+        </ul>
+      </div>
+
+      <h4>b. Reservation Cancellations</h4>
+      <ol>
+        <li>Search for the report name and ensure the report type is <strong>.XML</strong>.</li>
+        <li>Create a new schedule.</li>
+        <li><strong>Start Date Time:</strong> Tomorrow (17-Feb-2026 05:05)</li>
+        <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
+        <li><strong>Cancel Date:</strong> 18-Nov-2025 to <strong>Current Date</strong> (at the time of sending this email: 16-Feb-2026)</li>
+        <li><strong>Sort by:</strong> Cancel Date</li>
+        <li>
+          After saving this schedule, change the report parameters:
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FROM DATE</td>
+                <td>REPORT DATE – 90 DAYS</td>
+              </tr>
+              <tr>
+                <td>TO DATE</td>
+                <td>REPORT DATE + 0 DAYS</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Distribution List:</strong>
+        <ul>
+          <li>Select <strong>Email</strong> and set it to <a href="mailto:itsupport@hotelswitchboard.com">itsupport@hotelswitchboard.com</a></li>
+          <li>Set the Email Subject to: <span class="kbd">{YOUR PROPERTY CODE}_Cancellations</span></li>
+        </ul>
+      </div>
+
+      <h4>c. History and Forecast Current Year</h4>
+      <ol>
+        <li>Search for the report name and ensure the report type is <strong>.XML</strong>.</li>
+        <li>Create a new schedule.</li>
+        <li><strong>Start Date Time:</strong> Tomorrow (17-Feb-2026 05:10)</li>
+        <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
+        <li><strong>Dates:</strong> 18-Nov-2025 to <strong>Current Date + 365 days</strong> (at the time of sending this email: 16-Feb-2027)</li>
+        <li>
+          After saving this schedule, change the report parameters:
+          <table>
+            <thead>
+              <tr>
+                <th>Parameter</th>
+                <th>Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FROM DATE</td>
+                <td>REPORT DATE – 90 DAYS</td>
+              </tr>
+              <tr>
+                <td>TO DATE</td>
+                <td>REPORT DATE + 365 DAYS</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>Distribution List:</strong>
+        <ul>
+          <li>Select <strong>Email</strong> and set it to <a href="mailto:itsupport@hotelswitchboard.com">itsupport@hotelswitchboard.com</a></li>
+          <li>Set the Email Subject to: <span class="kbd">{YOUR PROPERTY CODE}_Occupancy</span></li>
+        </ul>
+      </div>
+
+      <p><strong>Final step:</strong> Do a test run of these reports by clicking <span class="kbd">Run Now</span> in their respective schedules.</p>
+    </div>
+
+    <p class="small">Dates referenced are based on the email send date: <strong>16-Feb-2026</strong>.</p>
+    <p class="small">If you have any questions or need assistance, please don’t hesitate to reach out.</p>
+  </div>
+</body>
+</html>

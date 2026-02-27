@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hilton PEP (HotelKey) — Report Setup</title>
+  <style>
+    body { font-family: Arial, Helvetica, sans-serif; color:#111; line-height:1.45; }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 8px 4px; }
+    h2 { margin: 0 0 10px 0; }
+    h3 { margin: 18px 0 8px 0; }
+    h4 { margin: 14px 0 6px 0; }
+    p { margin: 8px 0; }
+    ul, ol { margin: 8px 0 8px 22px; }
+    li { margin: 4px 0; }
+    .note { background:#f6f7f9; border:1px solid #e5e7eb; padding:10px 12px; border-radius:8px; margin: 10px 0; }
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; background:#f3f4f6; padding: 1px 6px; border-radius:6px; }
+    table { width: 100%; border-collapse: collapse; margin: 8px 0 12px 0; }
+    th, td { border: 1px solid #e5e7eb; padding: 8px 10px; vertical-align: top; }
+    th { background: #fafafa; text-align: left; }
+    .small { color:#444; font-size: 0.95em; }
+    .section { border-left: 4px solid #e5e7eb; padding-left: 12px; margin: 14px 0; }
+    .card { border:1px solid #d1d5db; border-radius:10px; padding:16px 18px; margin-bottom:18px; background:#ffffff; }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+        <!-- Greeting -->
+        <!-- Greeting -->
+    <div class="card">
+      <p style="margin-top:0;"><strong>Hi Natasha,</strong></p>
+
+      <p>
+        We received the daily reports for LAPLA dated <strong>13-Feb</strong>. Could you please confirm the daily schedules are also configured
+        to send to <span class="kbd">itsupport@hotelswitchboard.com</span>?
+      </p>
+
+      <div class="note" style="margin: 12px 0;">
+        <strong>Daily report configuration (please verify and adjust if needed):</strong>
+
+        <ul style="margin-top:10px;">
+
+          <li>
+            <strong>Booked Reservations</strong><br>
+            Subject: <span class="kbd">LAPLA_Booked-Reservations</span><br>
+            Start: <span class="kbd">Current Date − 90 days</span><br>
+            End: <span class="kbd">Current Date</span>
+          </li>
+
+          <li style="margin-top:8px;">
+            <strong>Occupancy Summary</strong><br>
+            Subject: <span class="kbd">LAPLA_Occupancy-Summary</span><br>
+            Start: <span class="kbd">Current Date − 90 days</span><br>
+            End: <span class="kbd">Current Date − 1 day</span>
+          </li>
+
+          <li style="margin-top:8px;">
+            <strong>Occupancy Forecast and History</strong><br>
+            Subject: <span class="kbd">LAPLA_Occupancy-Forecast</span><br>
+            Start: <span class="kbd">Current Date</span><br>
+            End: <span class="kbd">Current Date + 365 days</span>
+          </li>
+
+        </ul>
+      </div>
+
+      <p>
+        Since Hilton PEP for LAPLA is functioning very similar to <strong>HotelKey</strong>, please follow the steps below for the Onboarding Reports.
+      </p>
+    </div>
+
+
+
+    <!-- Onboarding -->
+    <div class="section">
+      <h3>A. Onboarding Reports</h3>
+      <div class="note">
+        <strong>Note:</strong> These onboarding reports are to be sent just once during the initial setup phase. We do not need these reports on a recurring basis.
+      </div>
+
+      <div class="note">
+        <strong>Export steps (apply to each batch):</strong>
+        <ol type="a" style="margin-top:6px;">
+          <li>Run the report</li>
+          <li>Make sure <strong>Show Grand Total</strong> is <strong>UN-CHECKED</strong></li>
+          <li>Click the <strong>Export</strong> icon</li>
+          <li>Select export type as <strong>CSV</strong></li>
+          <li>Ensure <strong>Group By Views</strong> are <strong>UN-CHECKED</strong> and <strong>All Columns</strong> are <strong>SELECTED</strong></li>
+          <li>Click <strong>Export</strong></li>
+          <li>Rename the file to the date range for identification (examples shown below)</li>
+          <li>Repeat for the next batch</li>
+        </ol>
+      </div>
+
+      <!-- a) Booked Reservations -->
+      <h4>a. Booked Reservations</h4>
+
+      <div class="note">
+        <strong>Note:</strong> Booked Reservations allows date ranges for up to <strong>94 days</strong> only.
+        Please export in the following batches.
+        <div class="small">Suggested naming example: <span class="kbd">Dec2025_Feb2026.csv</span></div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>START DATE</th><th>END DATE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2025-12-01</td><td>2026-02-18</td></tr>
+          <tr><td>2025-09-01</td><td>2025-11-30</td></tr>
+          <tr><td>2025-06-01</td><td>2025-08-31</td></tr>
+          <tr><td>2025-03-01</td><td>2025-05-31</td></tr>
+          <tr><td>2024-12-01</td><td>2025-02-28</td></tr>
+          <tr><td>2024-09-01</td><td>2024-11-30</td></tr>
+          <tr><td>2024-06-01</td><td>2024-08-31</td></tr>
+          <tr><td>2024-03-01</td><td>2024-05-31</td></tr>
+          <tr><td>2023-12-01</td><td>2024-02-29</td></tr>
+          <tr><td>2023-09-01</td><td>2023-11-30</td></tr>
+          <tr><td>2023-06-01</td><td>2023-08-31</td></tr>
+          <tr><td>2023-03-01</td><td>2023-05-31</td></tr>
+          <tr><td>2023-01-01</td><td>2023-02-28</td></tr>
+        </tbody>
+      </table>
+
+      <!-- b) Occupancy Summary -->
+      <h4>b. Occupancy Summary</h4>
+
+      <div class="note">
+        <strong>Note:</strong> Occupancy Summary allows date ranges for up to <strong>366 days</strong> at a time.
+        Please export in the following batches.
+        <div class="small">Suggested naming example: <span class="kbd">Occ_Summary_2026.csv</span></div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>START DATE</th><th>END DATE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2026-01-01</td><td>2026-02-17</td></tr>
+          <tr><td>2025-01-01</td><td>2025-12-31</td></tr>
+          <tr><td>2024-01-01</td><td>2024-12-31</td></tr>
+          <tr><td>2023-01-01</td><td>2023-12-31</td></tr>
+        </tbody>
+      </table>
+
+      <!-- c) Occupancy Forecast -->
+      <h4>c. Occupancy Forecast</h4>
+
+      <div class="note">
+        <strong>Note:</strong> Occupancy Forecast allows date ranges for up to <strong>366 days</strong> at a time.
+        Please export in the following batches.
+        <div class="small">Suggested naming example: <span class="kbd">Occ_Forecast_2026.csv</span></div>
+      </div>
+
+      <table>
+        <thead>
+          <tr><th>START DATE</th><th>END DATE</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>2026-02-18</td><td>2026-12-31</td></tr>
+          <tr><td>2027-01-01</td><td>2027-12-31</td></tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+</body>
+</html>
