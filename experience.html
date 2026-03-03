@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checking In on Your RevEVOLVE Experience</title>
+</head>
+
+<body style="background:#eef2f7; font-family: Arial, Helvetica, sans-serif; margin:0; padding:20px;">
+
+  <!-- Preview Controls -->
+  <div style="max-width:700px; margin:auto; background:#ffffff; padding:16px; border-radius:8px; border:1px solid #ddd; margin-bottom:16px;">
+    <h3 style="margin:0 0 12px 0;">Preview Controls</h3>
+
+    <label>Client Name</label><br>
+    <input type="text" id="clientInput" placeholder="Enter client name"
+           style="width:100%; padding:8px; margin-bottom:10px;"><br>
+
+    <button onclick="updateEmail()" 
+            style="background:#062956; color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer;">
+      Update Preview
+    </button>
+
+    <button onclick="resetEmail()" 
+            style="background:#6b7280; color:#fff; padding:10px 14px; border:none; border-radius:6px; cursor:pointer; margin-left:8px;">
+      Clear
+    </button>
+  </div>
+
+  <!-- EMAIL CONTENT -->
+  <div style="background:#eef2f7; padding:24px;">
+    
+    <div style="max-width:700px; margin:auto; background:#ffffff; border-radius:8px; overflow:hidden; border:1px solid #e3e6ea;">
+
+      <!-- Header -->
+      <div style="background:#062956; color:#ffffff; padding:20px 24px;">
+        <div style="font-size:18px; font-weight:700; line-height:1.2;">
+          Checking In on Your RevEVOLVE Experience
+        </div>
+      </div>
+
+      <!-- Body -->
+      <div style="padding:24px; color:#1f2937; font-size:14px; line-height:1.65;">
+
+        <p style="margin:0 0 14px 0;">
+          Hi <strong><span id="client_text">[Client Name]</span></strong>,
+        </p>
+
+        <p style="margin:0 0 14px 0;">
+          I hope you are doing well.
+        </p>
+
+        <p style="margin:0 0 14px 0;">
+          We wanted to check in and see how things are going with the platform so far.
+          How are you and your team adjusting to it?
+        </p>
+
+        <p style="margin:0 0 14px 0;">
+          If you have any suggestions, feedback, or ideas for improvement, we would genuinely love to hear them.
+          Also, please let us know if you are facing any challenges interpreting the data or if you have noticed
+          any discrepancies in the numbers. We are happy to review anything in detail with you.
+        </p>
+
+        <p style="margin:0 0 18px 0;">
+          If it would be helpful, we can also schedule a quick walkthrough session to go over features, reports,
+          or specific widgets/dashboards together. Just let us know a time that works best for you.
+        </p>
+
+        <p style="margin:0;">
+          Looking forward to your thoughts.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+<script>
+function updateEmail() {
+  document.getElementById("client_text").innerText =
+    document.getElementById("clientInput").value || "[Client Name]";
+}
+
+function resetEmail() {
+  document.getElementById("clientInput").value = "";
+  updateEmail();
+}
+
+updateEmail();
+</script>
+
+</body>
+</html>
