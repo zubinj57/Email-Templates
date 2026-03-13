@@ -110,8 +110,8 @@
         <li><strong>Start Date Time:</strong> Tomorrow (<span data-date-offset="1">17-Feb-2026</span> 05:00)</li>
         <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
         <li>Ensure <strong>both</strong> checkboxes are selected: <strong>StayDate</strong> and <strong>BookingDate</strong>.</li>
-        <li><strong>StayDate:</strong> <span data-date-offset="-90">18-Nov-2025</span> to <span data-date-offset="90">17-May-2026</span></li>
-        <li><strong>BookingDate:</strong> <span data-date-offset="-90">18-Nov-2025</span> to <strong>Current Date</strong> (at the time of sending this email: <span data-current-date>16-Feb-2026</span>)</li>
+        <li><strong>StayDate:</strong> Current Date - 90 days (<strong><span data-date-offset-ordinal="-90">18th Nov 2025</span></strong> at the time of sending this email) to Current Date + 90 days (<strong><span data-date-offset-ordinal="90">17th May 2026</span></strong> at the time of sending this mail)</li>
+        <li><strong>BookingDate:</strong> Current Date - 90 days (<strong><span data-date-offset-ordinal="-90">18th Nov 2025</span></strong> at the time of sending this email) to Current Date (<strong><span data-current-date-ordinal>16th Feb 2026</span></strong> at the time of sending this email)</li>
         <li><strong>Sort by:</strong> Arrival Date</li>
         <li>
           After saving this schedule, change the report parameters (SET DATE):
@@ -158,7 +158,7 @@
         <li>Create a new schedule.</li>
         <li><strong>Start Date Time:</strong> Tomorrow (<span data-date-offset="1">17-Feb-2026</span> 05:05)</li>
         <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
-        <li><strong>Cancel Date:</strong> <span data-date-offset="-90">18-Nov-2025</span> to <strong>Current Date</strong> (at the time of sending this email: <span data-current-date>16-Feb-2026</span>)</li>
+        <li><strong>Cancel Date:</strong> Current Date - 90 days (<strong><span data-date-offset-ordinal="-90">18th Nov 2025</span></strong> at the time of sending this email) to Current Date (<strong><span data-current-date-ordinal>16th Feb 2026</span></strong> at the time of sending this email)</li>
         <li><strong>Sort by:</strong> Cancel Date</li>
         <li>
           After saving this schedule, change the report parameters (SET DATE). <strong>You may ignore this if there is no option to Change Parameters:</strong>
@@ -197,7 +197,7 @@
         <li>Create a new schedule.</li>
         <li><strong>Start Date Time:</strong> Tomorrow (<span data-date-offset="1">17-Feb-2026</span> 05:10)</li>
         <li><strong>Repeats:</strong> Every 1 day, indefinitely</li>
-        <li><strong>Dates:</strong> <span data-date-offset="-90">18-Nov-2025</span> to <strong>Current Date + 365 days</strong> (at the time of sending this email: <span data-date-offset="365">15-Feb-2027</span>)</li>
+        <li><strong>Dates:</strong> Current Date - 90 days (<strong><span data-date-offset-ordinal="-90">18th Nov 2025</span></strong> at the time of sending this email) to Current Date + 365 days (<strong><span data-date-offset-ordinal="365">15th Feb 2027</span></strong> at the time of sending this mail)</li>
         <li>
           After saving this schedule, change the report parameters (SET DATE):
           <table>
@@ -255,6 +255,24 @@
       }).format(date).replace(/ /g, '-');
     }
 
+    function getOrdinal(day) {
+      if (day > 3 && day < 21) return 'th';
+      switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    }
+
+    function formatOrdinalDate(date) {
+      if (!date) return '';
+      const day = date.getDate();
+      const month = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(date);
+      const year = date.getFullYear();
+      return `${day}${getOrdinal(day)} ${month} ${year}`;
+    }
+
     function updateContent() {
       const clientName = clientNameInput.value.trim() || 'Christine';
       const propertyName = propertyNameInput.value.trim() || 'Candlewood Suites Midwest City OK';
@@ -273,12 +291,24 @@
         node.textContent = currentDate;
       });
 
+      document.querySelectorAll('[data-current-date-ordinal]').forEach((node) => {
+        node.textContent = formatOrdinalDate(baseDate) || '16th Feb 2026';
+      });
+
       document.querySelectorAll('[data-date-offset]').forEach((node) => {
         const offset = Number(node.getAttribute('data-date-offset')) || 0;
         if (!baseDate) return;
         const offsetDate = new Date(baseDate);
         offsetDate.setDate(offsetDate.getDate() + offset);
         node.textContent = formatDisplayDate(offsetDate);
+      });
+
+      document.querySelectorAll('[data-date-offset-ordinal]').forEach((node) => {
+        const offset = Number(node.getAttribute('data-date-offset-ordinal')) || 0;
+        if (!baseDate) return;
+        const offsetDate = new Date(baseDate);
+        offsetDate.setDate(offsetDate.getDate() + offset);
+        node.textContent = formatOrdinalDate(offsetDate);
       });
     }
 
