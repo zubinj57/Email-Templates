@@ -21,61 +21,38 @@
     .small { color:#444; font-size: 0.95em; }
     .section { border-left: 4px solid #e5e7eb; padding-left: 12px; margin: 14px 0; }
     .card { border:1px solid #d1d5db; border-radius:10px; padding:16px 18px; margin-bottom:18px; background:#ffffff; }
+    .controls { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; align-items:end; }
+    .field label { display:block; font-weight:700; margin-bottom:6px; }
+    .field input { width:100%; box-sizing:border-box; padding:10px 12px; border:1px solid #d1d5db; border-radius:8px; font: inherit; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-
-        <!-- Greeting -->
-        <!-- Greeting -->
     <div class="card">
-      <p style="margin-top:0;"><strong>Hi Natasha,</strong></p>
-
-      <p>
-        We received the daily reports for LAPLA dated <strong>13-Feb</strong>. Could you please confirm the daily schedules are also configured
-        to send to <span class="kbd">itsupport@hotelswitchboard.com</span>?
-      </p>
-
-      <div class="note" style="margin: 12px 0;">
-        <strong>Daily report configuration (please verify and adjust if needed):</strong>
-
-        <ul style="margin-top:10px;">
-
-          <li>
-            <strong>Booked Reservations</strong><br>
-            Subject: <span class="kbd">LAPLA_Booked-Reservations</span><br>
-            Start: <span class="kbd">Current Date − 90 days</span><br>
-            End: <span class="kbd">Current Date</span>
-          </li>
-
-          <li style="margin-top:8px;">
-            <strong>Occupancy Summary</strong><br>
-            Subject: <span class="kbd">LAPLA_Occupancy-Summary</span><br>
-            Start: <span class="kbd">Current Date − 90 days</span><br>
-            End: <span class="kbd">Current Date − 1 day</span>
-          </li>
-
-          <li style="margin-top:8px;">
-            <strong>Occupancy Forecast and History</strong><br>
-            Subject: <span class="kbd">LAPLA_Occupancy-Forecast</span><br>
-            Start: <span class="kbd">Current Date</span><br>
-            End: <span class="kbd">Current Date + 365 days</span>
-          </li>
-
-        </ul>
+      <div class="controls">
+        <div class="field">
+          <label for="clientName">Client Name</label>
+          <input id="clientName" type="text" value="Natasha" />
+        </div>
+        <div class="field">
+          <label for="sendDate">Email Send Date</label>
+          <input id="sendDate" type="date" />
+        </div>
       </div>
+    </div>
 
-      <p>
-        Since Hilton PEP for LAPLA is functioning very similar to <strong>HotelKey</strong>, please follow the steps below for the Onboarding Reports.
-      </p>
+    <!-- Greeting -->
+    <div class="card">
+      <p style="margin-top:0;"><strong id="greetingName">Hi Natasha,</strong></p>
+      <p>To set up the Hilton PEP/HotelKey integration, we will need to obtain some historical and current data exports from the system. Below are the details on the specific reports we need, along with instructions on how to export them.</p>
     </div>
 
 
 
     <!-- Onboarding -->
     <div class="section">
-      <h3>A. Onboarding Reports</h3>
+      <h3>A. Onboarding Reports (From <em>Dynamic Reports</em>)</h3>
       <div class="note">
         <strong>Note:</strong> These onboarding reports are to be sent just once during the initial setup phase. We do not need these reports on a recurring basis.
       </div>
@@ -107,21 +84,7 @@
         <thead>
           <tr><th>START DATE</th><th>END DATE</th></tr>
         </thead>
-        <tbody>
-          <tr><td>2025-12-01</td><td>2026-02-18</td></tr>
-          <tr><td>2025-09-01</td><td>2025-11-30</td></tr>
-          <tr><td>2025-06-01</td><td>2025-08-31</td></tr>
-          <tr><td>2025-03-01</td><td>2025-05-31</td></tr>
-          <tr><td>2024-12-01</td><td>2025-02-28</td></tr>
-          <tr><td>2024-09-01</td><td>2024-11-30</td></tr>
-          <tr><td>2024-06-01</td><td>2024-08-31</td></tr>
-          <tr><td>2024-03-01</td><td>2024-05-31</td></tr>
-          <tr><td>2023-12-01</td><td>2024-02-29</td></tr>
-          <tr><td>2023-09-01</td><td>2023-11-30</td></tr>
-          <tr><td>2023-06-01</td><td>2023-08-31</td></tr>
-          <tr><td>2023-03-01</td><td>2023-05-31</td></tr>
-          <tr><td>2023-01-01</td><td>2023-02-28</td></tr>
-        </tbody>
+        <tbody id="reservationsTable"></tbody>
       </table>
 
       <!-- b) Occupancy Summary -->
@@ -137,12 +100,7 @@
         <thead>
           <tr><th>START DATE</th><th>END DATE</th></tr>
         </thead>
-        <tbody>
-          <tr><td>2026-01-01</td><td>2026-02-17</td></tr>
-          <tr><td>2025-01-01</td><td>2025-12-31</td></tr>
-          <tr><td>2024-01-01</td><td>2024-12-31</td></tr>
-          <tr><td>2023-01-01</td><td>2023-12-31</td></tr>
-        </tbody>
+        <tbody id="summaryTable"></tbody>
       </table>
 
       <!-- c) Occupancy Forecast -->
@@ -158,14 +116,157 @@
         <thead>
           <tr><th>START DATE</th><th>END DATE</th></tr>
         </thead>
-        <tbody>
-          <tr><td>2026-02-18</td><td>2026-12-31</td></tr>
-          <tr><td>2027-01-01</td><td>2027-12-31</td></tr>
-        </tbody>
+        <tbody id="forecastTable"></tbody>
       </table>
+
+      <h4>d. <em>Applies only to Hilton Properties</em>.</h4>
+
+      <div class="note">
+        If the property recently migrated from OnQ to PEP and the requested range is unavailable in PEP, then please provide the following reports from <strong>Hilton Reporting Hub</strong> <strong>(in .xlsx format)</strong> as alternate onboarding reports:
+      </div>
+
+      <p><strong>Operational Revenue Reporting</strong> with the filters:</p>
+      <ul>
+        <li>Business Date: 1/1/2022 to <span id="reportExtractDateA">2026-03-20</span></li>
+        <li>Currency: USD</li>
+        <li>Weekday: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday</li>
+        <li>Property - InnCode: {YOUR PROPERTY CODE}</li>
+        <li>Property - Comparable (Current Year): No, Yes</li>
+      </ul>
+
+      <p><strong>Stay Date Reports</strong> with the filters:</p>
+      <ul>
+        <li>Booked Date: 1/1/2022 to <span id="reportExtractDateB">2026-03-20</span></li>
+        <li>Property - InnCode: {YOUR PROPERTY CODE}</li>
+        <li>Currency Conversion Type: Plan Exchange Rates</li>
+        <li>Display Currency: USD</li>
+        <li>Day Match: Dow Match</li>
+        <li>Cancelled Stay: No</li>
+        <li>Is No Show: No</li>
+        <li>Is Valid Stay: Yes</li>
+      </ul>
 
     </div>
 
   </div>
+  <script>
+    const LOOKBACK_YEARS = 3;
+
+    function formatDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function addDays(date, days) {
+      const next = new Date(date);
+      next.setDate(next.getDate() + days);
+      return next;
+    }
+
+    function endOfYear(year) {
+      return new Date(year, 11, 31);
+    }
+
+    function startOfMonth(date) {
+      return new Date(date.getFullYear(), date.getMonth(), 1);
+    }
+
+    function endOfMonth(year, monthIndex) {
+      return new Date(year, monthIndex + 1, 0);
+    }
+
+    function addMonths(date, months) {
+      return new Date(date.getFullYear(), date.getMonth() + months, 1);
+    }
+
+    function renderRows(tbody, ranges) {
+      tbody.innerHTML = ranges
+        .map(({ start, end }) => `<tr><td>${formatDate(start)}</td><td>${formatDate(end)}</td></tr>`)
+        .join("");
+    }
+
+    function buildReservationRanges(sendDate) {
+      const ranges = [];
+      const historyStart = new Date(sendDate.getFullYear() - LOOKBACK_YEARS, 0, 1);
+      let currentStart = startOfMonth(addMonths(sendDate, -2));
+      let currentEnd = new Date(sendDate);
+
+      while (currentEnd >= historyStart) {
+        const start = currentStart > historyStart ? new Date(currentStart) : new Date(historyStart);
+        ranges.push({ start, end: new Date(currentEnd) });
+
+        currentEnd = addDays(currentStart, -1);
+        currentStart = addMonths(currentStart, -3);
+
+        if (currentEnd < historyStart) {
+          break;
+        }
+
+        currentEnd = endOfMonth(currentStart.getFullYear(), currentStart.getMonth() + 2);
+      }
+
+      return ranges;
+    }
+
+    function buildSummaryRanges(sendDate) {
+      const ranges = [];
+      const summaryEnd = addDays(sendDate, -1);
+
+      for (let year = sendDate.getFullYear(); year >= sendDate.getFullYear() - LOOKBACK_YEARS; year -= 1) {
+        const start = new Date(year, 0, 1);
+        const end = year === summaryEnd.getFullYear() ? summaryEnd : endOfYear(year);
+
+        if (end >= start) {
+          ranges.push({ start, end });
+        }
+      }
+
+      return ranges;
+    }
+
+    function buildForecastRanges(sendDate) {
+      const ranges = [];
+
+      for (let year = sendDate.getFullYear(); year <= sendDate.getFullYear() + 1; year += 1) {
+        const start = year === sendDate.getFullYear() ? new Date(sendDate) : new Date(year, 0, 1);
+        const end = endOfYear(year);
+
+        if (end >= start) {
+          ranges.push({ start, end });
+        }
+      }
+
+      return ranges;
+    }
+
+    function updateTemplate() {
+      const clientNameInput = document.getElementById("clientName");
+      const sendDateInput = document.getElementById("sendDate");
+      const greetingName = document.getElementById("greetingName");
+      const sendDate = new Date(`${sendDateInput.value}T00:00:00`);
+      const clientName = clientNameInput.value.trim() || "there";
+
+      greetingName.textContent = `Hi ${clientName},`;
+
+      if (Number.isNaN(sendDate.getTime())) {
+        return;
+      }
+
+      renderRows(document.getElementById("reservationsTable"), buildReservationRanges(sendDate));
+      renderRows(document.getElementById("summaryTable"), buildSummaryRanges(sendDate));
+      renderRows(document.getElementById("forecastTable"), buildForecastRanges(sendDate));
+      document.getElementById("reportExtractDateA").textContent = formatDate(sendDate);
+      document.getElementById("reportExtractDateB").textContent = formatDate(sendDate);
+    }
+
+    const sendDateInput = document.getElementById("sendDate");
+    sendDateInput.value = formatDate(new Date());
+
+    document.getElementById("clientName").addEventListener("input", updateTemplate);
+    sendDateInput.addEventListener("input", updateTemplate);
+    updateTemplate();
+  </script>
 </body>
 </html>
