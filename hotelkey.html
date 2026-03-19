@@ -39,6 +39,10 @@
           <label for="sendDate">Email Send Date</label>
           <input id="sendDate" type="date" />
         </div>
+        <div class="field">
+          <label for="pastYears">Past Years</label>
+          <input id="pastYears" type="number" min="0" step="1" value="3" />
+        </div>
       </div>
     </div>
 
@@ -150,7 +154,7 @@
 
   </div>
   <script>
-    const LOOKBACK_YEARS = 3;
+    const RESERVATION_START_YEAR = 2023;
 
     function formatDate(date) {
       const year = date.getFullYear();
@@ -187,34 +191,85 @@
         .join("");
     }
 
-    function buildReservationRanges(sendDate) {
+    function buildReservationRanges(sendDate, startYear) {
       const ranges = [];
-      const historyStart = new Date(sendDate.getFullYear() - LOOKBACK_YEARS, 0, 1);
-      let currentStart = startOfMonth(addMonths(sendDate, -2));
-      let currentEnd = new Date(sendDate);
+      const sendYear = sendDate.getFullYear();
+      const sendMonth = sendDate.getMonth() + 1;
 
-      while (currentEnd >= historyStart) {
-        const start = currentStart > historyStart ? new Date(currentStart) : new Date(historyStart);
-        ranges.push({ start, end: new Date(currentEnd) });
+      for (let year = sendYear; year >= startYear; year -= 1) {
+        if (year === sendYear) {
+          if (sendMonth <= 3) {
+            ranges.push({
+              start: new Date(year, 0, 1),
+              end: new Date(sendDate),
+            });
+            continue;
+          }
 
-        currentEnd = addDays(currentStart, -1);
-        currentStart = addMonths(currentStart, -3);
+          if (sendMonth <= 6) {
+            ranges.push({
+              start: new Date(year, 3, 1),
+              end: new Date(sendDate),
+            });
+            ranges.push({
+              start: new Date(year, 0, 1),
+              end: new Date(year, 2, 31),
+            });
+            continue;
+          }
 
-        if (currentEnd < historyStart) {
-          break;
+          if (sendMonth <= 9) {
+            ranges.push({
+              start: new Date(year, 6, 1),
+              end: new Date(sendDate),
+            });
+            ranges.push({
+              start: new Date(year, 3, 1),
+              end: new Date(year, 5, 30),
+            });
+            ranges.push({
+              start: new Date(year, 0, 1),
+              end: new Date(year, 2, 31),
+            });
+            continue;
+          }
+
+          ranges.push({
+            start: new Date(year, 9, 1),
+            end: new Date(sendDate),
+          });
+          ranges.push({
+            start: new Date(year, 6, 1),
+            end: new Date(year, 8, 30),
+          });
+          ranges.push({
+            start: new Date(year, 3, 1),
+            end: new Date(year, 5, 30),
+          });
+          ranges.push({
+            start: new Date(year, 0, 1),
+            end: new Date(year, 2, 31),
+          });
+          continue;
         }
 
-        currentEnd = endOfMonth(currentStart.getFullYear(), currentStart.getMonth() + 2);
+        for (let quarterStartMonth = 9; quarterStartMonth >= 0; quarterStartMonth -= 3) {
+          ranges.push({
+            start: new Date(year, quarterStartMonth, 1),
+            end: endOfMonth(year, quarterStartMonth + 2),
+          });
+        }
       }
 
       return ranges;
     }
 
-    function buildSummaryRanges(sendDate) {
+    function buildSummaryRanges(sendDate, startYear) {
       const ranges = [];
       const summaryEnd = addDays(sendDate, -1);
+      const lastSummaryYear = summaryEnd.getFullYear();
 
-      for (let year = sendDate.getFullYear(); year >= sendDate.getFullYear() - LOOKBACK_YEARS; year -= 1) {
+      for (let year = lastSummaryYear; year >= startYear; year -= 1) {
         const start = new Date(year, 0, 1);
         const end = year === summaryEnd.getFullYear() ? summaryEnd : endOfYear(year);
 
@@ -227,25 +282,25 @@
     }
 
     function buildForecastRanges(sendDate) {
-      const ranges = [];
-
-      for (let year = sendDate.getFullYear(); year <= sendDate.getFullYear() + 1; year += 1) {
-        const start = year === sendDate.getFullYear() ? new Date(sendDate) : new Date(year, 0, 1);
-        const end = endOfYear(year);
-
-        if (end >= start) {
-          ranges.push({ start, end });
-        }
-      }
-
-      return ranges;
+      return [
+        {
+          start: new Date(sendDate),
+          end: endOfYear(sendDate.getFullYear()),
+        },
+        {
+          start: new Date(sendDate.getFullYear() + 1, 0, 1),
+          end: endOfYear(sendDate.getFullYear() + 1),
+        },
+      ];
     }
 
     function updateTemplate() {
       const clientNameInput = document.getElementById("clientName");
       const sendDateInput = document.getElementById("sendDate");
+      const pastYearsInput = document.getElementById("pastYears");
       const greetingName = document.getElementById("greetingName");
       const sendDate = new Date(`${sendDateInput.value}T00:00:00`);
+      const pastYears = Math.max(0, Number.parseInt(pastYearsInput.value, 10) || 0);
       const clientName = clientNameInput.value.trim() || "there";
 
       greetingName.textContent = `Hi ${clientName},`;
@@ -254,8 +309,10 @@
         return;
       }
 
-      renderRows(document.getElementById("reservationsTable"), buildReservationRanges(sendDate));
-      renderRows(document.getElementById("summaryTable"), buildSummaryRanges(sendDate));
+      const startYear = Math.max(RESERVATION_START_YEAR, sendDate.getFullYear() - pastYears);
+
+      renderRows(document.getElementById("reservationsTable"), buildReservationRanges(sendDate, startYear));
+      renderRows(document.getElementById("summaryTable"), buildSummaryRanges(sendDate, startYear));
       renderRows(document.getElementById("forecastTable"), buildForecastRanges(sendDate));
       document.getElementById("reportExtractDateA").textContent = formatDate(sendDate);
       document.getElementById("reportExtractDateB").textContent = formatDate(sendDate);
@@ -266,6 +323,7 @@
 
     document.getElementById("clientName").addEventListener("input", updateTemplate);
     sendDateInput.addEventListener("input", updateTemplate);
+    document.getElementById("pastYears").addEventListener("input", updateTemplate);
     updateTemplate();
   </script>
 </body>
